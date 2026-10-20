@@ -3,10 +3,14 @@ using UnityEngine;
 public class Scorer : MonoBehaviour
 {
     int score = 0;
+
     void OnCollisionEnter(Collision collision)
     {
-        score++;
+        if (collision.gameObject.tag != "Hit")
+        {
+            score++;
+            Debug.Log("You hit obstacles " + score.ToString() + " Times");
+        }
 
-        Debug.Log(" You hit obstacles " + score.ToString() + " Times");
     }
 }
