@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class FlyAtPlayer : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] Transform playerTransform;
+    [SerializeField] float speed = 8f;
+    Vector3 playerPosition;
+
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        playerPosition = playerTransform.position;
+
+        transform.position = Vector3.MoveTowards(transform.position, playerPosition, speed * Time.deltaTime);
     }
 }
