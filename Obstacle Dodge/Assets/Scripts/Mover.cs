@@ -10,6 +10,11 @@ public class Mover : MonoBehaviour
 
     void Update()
     {
+        Movement();
+    }
+
+    void Movement()
+    {
         float xValue = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
         float zValue = Input.GetAxis("Vertical") * Time.deltaTime * speed;
         float yValue = 0f;
