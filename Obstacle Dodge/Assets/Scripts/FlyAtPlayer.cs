@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class FlyAtPlayer : MonoBehaviour
 {
-    [SerializeField] Transform playerTransform;
+    Transform playerTransform;
     [SerializeField] float speed = 8f;
     Vector3 playerPosition;
 
     void Start()
     {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         playerPosition = playerTransform.position;
     }
 
