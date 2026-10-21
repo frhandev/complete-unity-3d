@@ -9,6 +9,8 @@ public class Movement : MonoBehaviour
     [SerializeField] float thrustStrength = 8f;
     [SerializeField] float rotationSpeed = 16f;
 
+    [SerializeField] AudioSource mainEngineSound;
+
 
     Rigidbody rigidbody;
 
@@ -35,6 +37,15 @@ public class Movement : MonoBehaviour
         if (thrust.IsPressed())
         {
             rigidbody.AddRelativeForce(Vector3.up * thrustStrength * Time.fixedDeltaTime);
+
+            if (!mainEngineSound.isPlaying)
+            {
+                mainEngineSound.Play();
+            }
+        }
+        else
+        {
+            mainEngineSound.Stop();
         }
     }
 
