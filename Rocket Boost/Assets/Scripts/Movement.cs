@@ -42,6 +42,13 @@ public class Movement : MonoBehaviour
     {
         float rotationInput = rotation.ReadValue<float>();
 
-        transform.Rotate(Vector3.back * rotationSpeed * Time.fixedDeltaTime *rotationInput);
+        if (rotationInput > 0)
+        {
+            transform.Rotate(Vector3.forward * -rotationSpeed * Time.fixedDeltaTime);
+        }
+        else if (rotationInput < 0)
+        {
+            transform.Rotate(Vector3.forward * rotationSpeed * Time.fixedDeltaTime);
+        }
     }
 }
