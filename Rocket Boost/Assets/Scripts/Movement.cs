@@ -44,11 +44,18 @@ public class Movement : MonoBehaviour
 
         if (rotationInput > 0)
         {
-            transform.Rotate(Vector3.forward * -rotationSpeed * Time.fixedDeltaTime);
+            ApplyRotation(-rotationSpeed);
         }
         else if (rotationInput < 0)
         {
-            transform.Rotate(Vector3.forward * rotationSpeed * Time.fixedDeltaTime);
+            ApplyRotation(rotationSpeed);
         }
+    }
+
+    private void ApplyRotation(float rotaion)
+    {
+        rigidbody.freezeRotation = true;
+        transform.Rotate(Vector3.forward * rotaion * Time.fixedDeltaTime);
+        rigidbody.freezeRotation = false;
     }
 }
