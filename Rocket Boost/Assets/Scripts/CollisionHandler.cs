@@ -4,10 +4,19 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip success;
+    [SerializeField] AudioClip crash;
+    [SerializeField] ParticleSystem successParticles;
+    [SerializeField] ParticleSystem crashParticles;
     [SerializeField] float loadLevelDelay = 2f;
+
+    private bool isControllable = true;
 
     void OnCollisionEnter(Collision collision)
     {
+        if (!isControllable) { return; }
+
         switch (collision.gameObject.tag)
         {
             case "Friendly":
@@ -20,13 +29,18 @@ public class CollisionHandler : MonoBehaviour
                 break;
             default:
                 StartCrashSequence();
+
                 break;
         }
     }
 
     void StartSuccessSequence()
     {
+        isControllable = false;
+        successParticles.Play();
+        audioSource.Stop();
         GetComponent<Movement>().enabled = false;
+        audioSource.PlayOneShot(success);
         Invoke("LoadNextLevel", loadLevelDelay);
     }
 
@@ -46,7 +60,11 @@ public class CollisionHandler : MonoBehaviour
 
     void StartCrashSequence()
     {
+        isControllable = false;
+        crashParticles.Play();
+        audioSource.Stop();
         GetComponent<Movement>().enabled = false;
+        audioSource.PlayOneShot(crash);
         Invoke("ReloadLevel", loadLevelDelay);
     }
 
